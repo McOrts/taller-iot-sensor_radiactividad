@@ -5,5 +5,5 @@ Taller IoT para construir un medidor Geiger conectado. Basado en el ESP8266, MQT
 **Hardware**
 - [WEMOS D1 Mini Pro 16 MBytes con antena externa](https://s.click.aliexpress.com/e/kMC1v8nW) ×	1	 
 <img src="./img/WemosD1MiniPro.png" width="250" align="right" />
-
+- https://es.aliexpress.com/item/1005004074447194.html
 
