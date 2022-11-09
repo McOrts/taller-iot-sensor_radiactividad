@@ -12,4 +12,4 @@ const char* mqtt_sub_topic_operation = "/home/meteo/radiation_sensor/operation";
 const char* mqtt_pub_topic_radiation = "/home/meteo/radiation_sensor/cpm";
 
 // Other params
-const int pin_detector = 14; //D2
+const int pin_detector = 14; //D5
