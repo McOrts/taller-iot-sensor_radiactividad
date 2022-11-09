@@ -39,11 +39,16 @@ Si ya hay URL registradas se puede hacer clic en el ícono pequeño a la derecha
 Ahora podemos agregar los tableros ESP haciendo clic en la opción herramientas > tablero > administrador de tableros… en el menú.
 <img src="./img/ESPBoardsIDE.png" width="500"/> 
 
-Busqua el paquete ESP8266 e instálalo. Una vez que se haya instalado, puedes cerrar el administrador de placas.
+Busca el paquete ESP8266 e instálalo. Una vez que se haya instalado, puedes cerrar el administrador de placas.
 
 ### Elige la placa y el puerto
 A continuación, debemos seleccionar la placa Wemos D1 Mini PRO del menú de herramientas. Tendremos que seleccionar **LOLIN (WEMOS) D1 mini PRO** de los dispositivos ESP recién agregados.
-
 <img src="./img/WEMOSD1PROSettingIDE.png" width="500"/> 
 
+Puede suceder que la aplicación encuentre dependencias u otras librerias desactializadas. Aparecería un mensaje como este que deberás aceptar.
+<img src="./img/ESPWemosIDE.png" width="500"/> 
+
 Finalmente, debemos elegir el puerto correcto en el menú de herramientas . En Mac/Linux esto aparecerá como algo así como **dev/cu.usbserial-xxxx** y en Windows será **COMX\**.
+<img src="./img/WEMOSD1PROSettingIDE_Port.png" width="500"/> 
+
+
