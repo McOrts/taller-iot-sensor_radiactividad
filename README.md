@@ -30,8 +30,9 @@ Una vez que se haya instalado el IDE de Arduino, ábralo y haga clic en preferen
 <img src="./img/ESPPreferencesIDE.png" width="500"/> 
 
 Tendremos que agregar esta  URL em la caja de texto de "Additional board manager URLs":
+```
 https://arduino.esp8266.com/stable/package_esp8266com_index.json
-
+```
 Si ya hay URL registradas se puede hacer clic en el ícono pequeño a la derecha del cuadro de texto para registrar varias URL's.
 
 ### Añadir las placas ESP para el configurador
