@@ -1,14 +1,3 @@
-/*
-   This code interacts with the RadiationD-v1.1 (CAJOE) Geiger counter board
-   and reports readings in CPM (Counts Per Minute).
-   Connect the output of the Geiger counter to pin inputPin.
-   ******* !!!!!!!!! Adapted to WEMOS D1 mini interruptions
-   Author: Carlos Orts
-   Based on initial work of Andreas Spiess
-   License: MIT License
-   Please use freely with attribution. Thank you!
-*/
-
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <Wire.h>
@@ -19,7 +8,7 @@
 #include "settings.h"
 
 /* Times for CPM calculation */
-#define LOG_PERIOD 60000  //Logging period in milliseconds, recommended value 15000-60000.
+#define LOG_PERIOD 15000  //Logging period in milliseconds, recommended value 15000-60000.
 #define MAX_PERIOD 60000  //Maximum logging period without modifying this sketch
 
 unsigned long counts;     //variable for GM Tube events
@@ -29,7 +18,6 @@ unsigned long previousMillis;  //variable for time measurement
 
 /* Configuración cliente WiFi */
 WiFiClient espClient;
-String IP = String(15);
 
 /* Configuración MQTT */
 PubSubClient clientMqtt(espClient);
@@ -62,14 +50,6 @@ void setup() {
   delay (1000);
 }
 
-String IpAddress2String(const IPAddress& ipAddress)
-{
-  return String(ipAddress[0]) + String(".") +\
-  String(ipAddress[1]) + String(".") +\
-  String(ipAddress[2]) + String(".") +\
-  String(ipAddress[3])  ; 
-}
-
 void setup_wifi() {
   delay(10);
 
@@ -88,7 +68,6 @@ void setup_wifi() {
     Serial.print(".");
   }
 
-  IP=IpAddress2String(WiFi.localIP());
   Serial.println("");
   Serial.println("[WIFI]WiFi conectada");
   Serial.print("[WIFI]IP: ");
@@ -123,7 +102,6 @@ void reconnect() {
       Serial.println("[MQTT]Conectado al servidor MQTT");
       // Once connected, publish an announcement...
       clientMqtt.publish(mqtt_sub_topic_healthcheck, "starting");
-      clientMqtt.publish(mqtt_sub_topic_ip, IP.c_str());
       // ... and subscribe
       clientMqtt.subscribe(mqtt_sub_topic_operation);
     } else {
