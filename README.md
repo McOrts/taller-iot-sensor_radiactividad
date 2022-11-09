@@ -68,5 +68,11 @@ Este programa lo podrás encontrar en la ruta de ejemplos:
 Con todo lo anterior configurado ahora solo tendrás que dar al botón de cargar (_upload_) y al cabo de un rato, el firmaware nuevo se cargará en la placa empezando a parpadear el LED y con estos mensajes de salida en la aplicación:
 <img src="./img/IDE_WEMOS_test_blink_output.png" width="700"/> 
 
+### 6. Añadir la librería de MQTT
+Nuestro sensor va a utilizar colas MQTT para publicar sus lecturas y recbir comandos. Esta es la razón por la que hay la llamada a esta librería: 
+#include <PubSubClient.h>
+
+Por lo tanto hay se buscarla e instalarla con todas sus dependencias:
+<img src="./img/ArduinoLibMQTT.png" width="700"/> 
 
 
