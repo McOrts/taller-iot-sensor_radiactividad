@@ -5,10 +5,9 @@ Taller IoT para construir un medidor Geiger conectado. Basado en el ESP8266, MQT
 **Hardware**
 - 1 x [WEMOS D1 Mini Pro 16 MBytes con antena externa](https://www.aliexpress.com/item/32801063577.html)
 <img src="./img/WemosD1MiniPro.png" width="250" align="right" />
+
 La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamaño reducido.
-<br>
   - Permite ser programado directamente desde el IDE de Arduino.
-<br>
   - Ofrece pines de voltajes de salida de 3,2V y 5V.
 <br>
   - Tiene conectividad Wi-Fi con todo el estak de TCP/IP.
@@ -26,7 +25,9 @@ La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamañ
     _  * 16M bytes(128M bit) Flash
 <br>
 
-- https://es.aliexpress.com/item/1005004074447194.html
+- [Contador Geiger radiación Beta Gamma ensamblado] (https://es.aliexpress.com/item/1005004074447194.html)
+<img src="./img/RadiationD_v1_1_CAJOE.png" width="700" align="right" />
+
 
 ## Software
 ### 1. Instalación del IDE de Arduino (Ver 2.0.1)
