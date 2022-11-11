@@ -38,14 +38,19 @@ String mqttcommand = String(14);
 
 /* Tube pulse counter */
 ICACHE_RAM_ATTR void tube_impulse() {
-  Serial.print(".");
   counts++;
+  Serial.print("*");
 }
 
 void setup() {
   Serial.begin(9600);
+
+  /* Initialize board's LED */
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(500);
     
-  /* Iiniciar wifi */
+  /* Initialize wifi */
   setup_wifi();
   clientMqtt.setServer(mqtt_server, mqtt_port);
   clientMqtt.setCallback(callback);
@@ -142,6 +147,7 @@ void loop() {
   clientMqtt.loop();
     unsigned long currentMillis = millis();
   if(currentMillis - previousMillis > LOG_PERIOD){
+    digitalWrite(LED_BUILTIN, LOW);       
     previousMillis = currentMillis;
     cpm = counts * multiplier;
     snprintf (msg, 10, "%6i", cpm);
@@ -149,5 +155,6 @@ void loop() {
     Serial.print(msg);
     Serial.println(" CPM");
     counts = 0;
+    digitalWrite(LED_BUILTIN, HIGH);
   }
 }
