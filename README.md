@@ -50,7 +50,7 @@ La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamañ
 La idea es cocolar y conectar todos los componentes dentro de la caja de 125x125mm de tapa transparente. Aunque el tubo Geiger irá fuera a efectos de que la caja no haga de aislamiento de la radiación alfa (α).
 
 La conectividad es bastante sencilla aunque hay que asegurarse de una buena conexión y aislamiento ya que el dispositivo trabaja a 380V.
-![Breadboard](./img/IoT_nuclear_radiation_sensor_bb)
+![Breadboard](./img/IoT_nuclear_radiation_sensor_bb.png)
 
 
 ## Software
