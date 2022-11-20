@@ -25,9 +25,11 @@ La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamañ
     _  * 16M bytes(128M bit) Flash
 <br>
 
-- [Contador Geiger radiación Beta Gamma ensamblado] (https://es.aliexpress.com/item/1005004074447194.html)
+- [Contador Geiger radiación Beta Gamma ensamblado](https://es.aliexpress.com/item/1005004074447194.html)
 <img src="./img/RadiationD_v1_1_CAJOE.png" width="700" align="right" />
 
+- [Caja impermeable para exteriores con tapa transparente de plástico ABS](https://es.aliexpress.com/item/4000852737997.html)
+<img src="./img/CaseTransparentIP67.png" width="500" align="right" />
 
 ## Software
 ### 1. Instalación del IDE de Arduino (Ver 2.0.1)
