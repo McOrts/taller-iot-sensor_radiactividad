@@ -3,7 +3,7 @@ Taller IoT para construir un medidor Geiger conectado. Basado en el ESP8266, MQT
 
 ## Componentes que vamos a utilizar
 **Hardware**
-- 1 x [WEMOS D1 Mini Pro 16 MBytes con antena externa](https://www.aliexpress.com/item/32801063577.html)
+- [ ] 1 x [WEMOS D1 Mini Pro 16 MBytes con antena externa](https://www.aliexpress.com/item/32801063577.html)
 <img src="./img/WemosD1MiniPro.png" width="250" align="right" />
 
 La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamaño reducido.
@@ -25,23 +25,33 @@ La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamañ
     _  * 16M bytes(128M bit) Flash
 <br>
 
-- [Contador Geiger radiación Beta Gamma ensamblado](https://es.aliexpress.com/item/1005004074447194.html)
+- [ ] 1 x [Contador Geiger radiación Beta Gamma ensamblado](https://es.aliexpress.com/item/1005004074447194.html)
 <img src="./img/RadiationD_v1_1_CAJOE.png" width="700" align="right" />
 
-- [Convertidor DC-DC, 12V a 5V conector micro-USB](https://es.aliexpress.com/item/32973455778.html)
-<img src="./img/DC-DC_Adapter.png" width="700" align="right" />
+- [ ] 1 x [Convertidor DC-DC, 12V a 5V conector micro-USB](https://es.aliexpress.com/item/32973455778.html)
+<img src="./img/DC-DC_Adapter.png" width="300" align="right" />
 
-- [Caja impermeable para exteriores con tapa transparente de plástico ABS](https://es.aliexpress.com/item/4000852737997.html)
-<img src="./img/CaseTransparentIP67.png" width="500" align="right" />
+- [ ] 1 x [Caja impermeable para exteriores con tapa transparente de plástico ABS](https://es.aliexpress.com/item/4000852737997.html)
+<img src="./img/CaseTransparentIP67.png" width="300" align="right" />
 
-- [Placa protoboard para soldar](https://es.aliexpress.com/item/4001094817386.html)
-<img src="./img/protoboard_solder.png" width="300" align="right" />
+- [ ] 1 x [Placa protoboard para soldar](https://es.aliexpress.com/item/4001094817386.html)
+<img src="./img/protoboard_solder.png" width="100" align="right" />
 
-- [Cable apantallado de al menos tres hilos](https://es.aliexpress.com/item/1005004134473331.html)
-<img src="./img/cable.png" width="300" align="right" />
+- [ ] 1 x [Cable apantallado de al menos tres hilos](https://es.aliexpress.com/item/1005004134473331.html)
+<img src="./img/cable.png" width="100" align="right" />
 
-- [Conector para soldar en PCB](https://es.aliexpress.com/item/33025312329.html)
-<img src="./img/connector.png" width="400" align="right" />
+- [ ] 1 x [Conector para soldar en PCB](https://es.aliexpress.com/item/33025312329.html)
+<img src="./img/connector.png" width="100" align="right" />
+
+- [ ] 1 x [Resistencia ajustable de 10 Kohm](https://es.aliexpress.com/item/33043479672.html)
+<img src="./img/resistor.png" width="100" align="right" />
+
+## Montaje
+La idea es cocolar y conectar todos los componentes dentro de la caja de 125x125mm de tapa transparente. Aunque el tubo Geiger irá fuera a efectos de que la caja no haga de aislamiento de la radiación alfa (α).
+
+La conectividad es bastante sencilla aunque hay que asegurarse de una buena conexión y aislamiento ya que el dispositivo trabaja a 380V.
+![Breadboard](./img/IoT_nuclear_radiation_sensor_bb)
+
 
 ## Software
 ### 1. Instalación del IDE de Arduino (Ver 2.0.1)
