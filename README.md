@@ -28,8 +28,20 @@ La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamañ
 - [Contador Geiger radiación Beta Gamma ensamblado](https://es.aliexpress.com/item/1005004074447194.html)
 <img src="./img/RadiationD_v1_1_CAJOE.png" width="700" align="right" />
 
+- [Convertidor DC-DC, 12V a 5V conector micro-USB](https://es.aliexpress.com/item/32973455778.html)
+<img src="./img/DC-DC_Adapter.png" width="700" align="right" />
+
 - [Caja impermeable para exteriores con tapa transparente de plástico ABS](https://es.aliexpress.com/item/4000852737997.html)
 <img src="./img/CaseTransparentIP67.png" width="500" align="right" />
+
+- [Placa protoboard para soldar](https://es.aliexpress.com/item/4001094817386.html)
+<img src="./img/protoboard_solder.png" width="300" align="right" />
+
+- [Cable apantallado de al menos tres hilos](https://es.aliexpress.com/item/1005004134473331.html)
+<img src="./img/cable.png" width="300" align="right" />
+
+- [Conector para soldar en PCB](https://es.aliexpress.com/item/33025312329.html)
+<img src="./img/connector.png" width="400" align="right" />
 
 ## Software
 ### 1. Instalación del IDE de Arduino (Ver 2.0.1)
