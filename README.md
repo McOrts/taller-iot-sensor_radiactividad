@@ -55,7 +55,10 @@ La idea es cocolar y conectar todos los componentes dentro de la caja de 125x125
 La conectividad es bastante sencilla aunque hay que asegurarse de una buena conexión y aislamiento ya que el dispositivo trabaja a 380V.
 ![Breadboard](./img/IoT_nuclear_radiation_sensor_bb.png)
 
-- Lo primero será activar la salida de antena WiFi del **microcontrolador Wemos D1 mini**. Para ello hay que recolocar una resistencia de 0 ohm. Es un componente SMD por lo tanto pequeño y dificil de manejar. Hay que desoldarlo y vlverlo a soldar con un giro de 90º
+- Lo primero será cablear la PCB según el esquema anterior.
+<img src="./img/breadboard.jpg" width="300" align="center" />
+
+- Si queremos que el sensor tenga un largo alcance de conexión. Es necesario activar la salida de antena WiFi del **microcontrolador Wemos D1 mini**. Para ello hay que recolocar una resistencia de 0 ohm. Es un componente SMD por lo tanto pequeño y dificil de manejar. Hay que desoldarlo y vlverlo a soldar con un giro de 90º
 <img src="./img/IMG_4454.jpg" align="center" />
 
 - La placa del circuito principal del sensor se fijará al fondo de la caja con dos tornillos centrales. Tras lo que tendremos a la vista el espacio para colocar el **conector de alimentación** en la parte superior derecha. Si vamos alimentar el circuito con 12V dendremos que soldar la entrada del adaptador a la parte interna de este conector.
@@ -69,11 +72,10 @@ Nos aseguraremos de aislar bien todas las partes donde el conector del tubo haya
 - La **antena Wifi** se podrá situar fácilmente en la esquina superior derecha de la caja:
 <img src="./img/IMG_4450.jpg" width="300" align="center" />
 
+<img src="./img/cover+pcb.png" width="300" align="right" />
+
 - Antes de fijar la placa transpatente que soporta la PCB, conectaremos el cable de tres hilos.
 <img src="./img/IMG_4449.jpg" width="300" align="center" />
-
-
-
 
 ## Software
 ### 1. Instalación del IDE de Arduino (Ver 2.0.1)
@@ -112,14 +114,64 @@ En este punto vamos a chequear todo cargando un _sketch_ que hará que la luz az
 Este programa lo podrás encontrar en la ruta de ejemplos:
 <img src="./img/IDE_WEMOS_test_blink.png" width="700"/> 
 
-Con todo lo anterior configurado ahora solo tendrás que dar al botón de cargar (_upload_) y al cabo de un rato, el firmaware nuevo se cargará en la placa empezando a parpadear el LED y con estos mensajes de salida en la aplicación:
-<img src="./img/IDE_WEMOS_test_blink_output.png" width="700"/> 
-
 ### 6. Añadir la librería de MQTT
 Nuestro sensor va a utilizar colas MQTT para publicar sus lecturas y recbir comandos. Esta es la razón por la que hay la llamada a esta librería: 
 #include <PubSubClient.h>
 
 Por lo tanto hay se buscarla e instalarla con todas sus dependencias:
 <img src="./img/ArduinoLibMQTT.png" width="700"/> 
+
+### 7. Configuración y carga del firmware 
+El programa incluye un archivo de configuración _settings.h_ que contiene las credenciales para la conexión WiFi que hay que poner, y la configuración MQTT de nuestro servidor o de uno externo.
+
+```cpp
+// WiFi Configuration
+const char* ssid = "??";
+const char* password = "??";
+
+// MQTT Configuration
+const char* mqtt_server = "192.168.1.114";
+const int mqtt_port = 1883;
+const char* mqtt_id = "radiation_sensor";
+const char* mqtt_sub_topic_healthcheck = "/home/meteo/radiation_sensor";
+const char* mqtt_sub_topic_ip = "/home/meteo/radiation_sensor/ip";
+const char* mqtt_sub_topic_operation = "/home/meteo/radiation_sensor/operation";
+const char* mqtt_pub_topic_radiation = "/home/meteo/radiation_sensor/cpm";
+
+// Other params
+const int pin_detector = 14; //D5
+```
+
+Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./src/IoT_nuclear_radiation_sensor/IoT_nuclear_radiation_sensor.ino) y dar al botón de cargar (_upload_) y al cabo de un rato, el firmaware nuevo se cargará en la placa empezando a parpadear el LED y con estos mensajes de salida en la aplicación:
+<img src="./img/IDE_WEMOS_test_blink_output.png" width="700"/> 
+
+## Registrar el dispositivo
+Vamos a utilizar la plataforma de GMC.MAP que está desarrollada por un fabricante GQ Electronics LLC y que amablemente ha abierto a la comunidad para que podamos integrar nuestros sensores en su GIS.
+
+### Crea una cuenta
+<img src="./img/gmc_register2.jpg" align="left" />
+
+El registro del dispositivo se hace desde la web https://www.gmcmap.com/userAccountLogin-x.asp
+
+### Añade el dispositivo
+
+<img src="./img/gmc_register0.jpg" align="center" />
+<img src="./img/gmc_register1.jpg" align="center" />
+
+
+Una vez creas una cuenta e inicias sesión, podrás registrar tu dispositivo. Completa el formulario para registrar tu dispositivo. Ve a Inicio -> (Iniciar sesión) - Sensores -> Registrar nuevo sensor
+
+-   El ID del sensor es el ChipID del ESP8266 (NodeMCU) que anotaste antes
+-   Tu dirección de correo electrónico no será publicada
+-   Tu dirección: Calle con número de casa, código postal y ciudad. Haga clic en "Buscar dirección ingresada" para obtener las coordenadas de la ubicación. Compruebe la posición, cámbielo si es necesario
+-   Establece un nombre de sensor personal para que sea más fácil separarlos si tienes varios sensores (como jardín, etc.)
+-   Los alrededores de la estación (Ejemplo: altura sobre el suelo, lado de la carretera, alto volumen de tráfico, campo libre o similar)
+
+## Integración con Node-RED
+<img src="img/node-red.png" width="700" align="center" />
+
+<img src="img/mqtt_topic.png" width="50" align="right" />
+
+Como hemos visto en la configuración del firmware del microcontrolador tenemos un servidor MQTT al que se enviará la información. Si visualizamos directamente el topic donde llevan los valores, veremos esto:
 
 
