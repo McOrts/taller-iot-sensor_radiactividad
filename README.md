@@ -148,19 +148,17 @@ Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./s
 ## Registrar el dispositivo
 Vamos a utilizar la plataforma de GMC.MAP que está desarrollada por el fabricante GQ Electronics LLC y que amablemente ha abierto a la comunidad para que podamos integrar nuestros sensores en su GIS.
 
-### Crea una cuenta
-<img src="./img/gmc_register2.png" align="left" />
-
+### Crear una cuenta
 El registro del dispositivo se hace desde la web https://www.gmcmap.com/userAccountLogin-x.asp donde tendremos que darnos de alta con una dirección de correo. 
 
 ### Añade el dispositivo
+<img src="./img/gmc_register2.png" width="400" align="right" />
 
 Desde _My account_ entramos en la opción de: _Manage my Geiger Counters_ y pulsamos: _Add a device_. Lo primero que nos pedirán será la ubicación geográfica del sensor que se determina buscando en el mapa el punto de instalación y marcando con el ratón el lugar.
+<img src="./img/gmc_register1.png" width="350" align="left" />
+<img src="./img/gmc_register0.png" width="350" align="left" />
 
 Hecho esto, tendremos que editar de nuevo la ficha del dispositivo para completar algunos datos más. Pulsando _Update My Geiger Counter_ habremos acabado el proceso quedándonos con el _Geiger Counter ID_ que utilizaremos para la API.
-
-<img src="./img/gmc_register0.png" align="center" />
-<img src="./img/gmc_register1.png" align="center" />
 
 ## Integración con Node-RED
 <img src="img/mqtt_topic.png" width="50" align="right" />
@@ -182,17 +180,17 @@ La aplicación realmente es mas compleja porque tiene que calcular valores de me
 - **GeigerCounterID**: el identificador único del dispositivo registrado en la web según los pasos descritos anteriormente.
 - **nCPM**: número de cuentas por minuto. Es el número de partículas detectadas.
 - **ACPM**: media de CPM en una hora.
-- ** nuSv**: micro-Sievert/hora calculados según la fórmula: ¨CMP * 0,0065¨
+- **nuSv**: micro-Sievert/hora calculados según la fórmula: ¨CMP * 0,0065¨
 
 De esta manera nuestras lecturas serán incorporadas a esta plataforma donde nuestros datos se guardarán y el último valor será mostrado en un punto el mapa con el color en función al valor de CPM.
 
 <img src="img/gmcmap.png" width="700" align="center" />
 
 Para este proyecto se ha ampliado la aplicación Node-RED con el fin de ofrecer una web donde observar en tiempo real las lecturas y su evolución: http://radiacion.mooo.com:48059/ui
-<img src="img/IoT_nuclear_radiation_sensor_dashboard.png" width="700" align="center" />
+<img src="img/IoT_nuclear_radiation_sensor_UI.png" align="center" />
 
 El flujo necesario para esto es más complejo y su código también está repositado aquí. 
-<img src="img/IoT_nuclear_radiation_sensor_NoderedBasicFlow.png" width="700" align="center" />
+<img src="img/IoT_nuclear_radiation_sensor_NoderedFlow.png" align="center" />
 
 ## Agradecimientos 
 - Adrian Brancolino por sus buenos consejos para resolver los problemas de electrónica a los que me he enfrentado.
