@@ -26,10 +26,10 @@ La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamañ
 <br>
 
 - [ ] 1 x [Contador Geiger radiación Beta Gamma ensamblado](https://es.aliexpress.com/item/1005004074447194.html)
-<img src="./img/RadiationD_v1_1_CAJOE.png" width="700" align="right" />
+<img src="./img/RadiationD_v1_1_CAJOE.jpg" align="center" />
 
 - [ ] 1 x [Convertidor DC-DC, 12V a 5V conector micro-USB](https://es.aliexpress.com/item/32973455778.html)
-<img src="./img/DC-DC_Adapter.png" width="300" align="right" />
+<img src="./img/DC-DC_Adapter.png" width="200" align="right" />
 
 - [ ] 1 x [Caja impermeable para exteriores con tapa transparente de plástico ABS](https://es.aliexpress.com/item/4000852737997.html)
 <img src="./img/CaseTransparentIP67.png" width="300" align="right" />
@@ -46,11 +46,33 @@ La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamañ
 - [ ] 1 x [Resistencia ajustable de 10 Kohm](https://es.aliexpress.com/item/33043479672.html)
 <img src="./img/resistor.png" width="100" align="right" />
 
+- [ ] 1 x [conector dos pines IP68](https://es.aliexpress.com/item/4000058485279.html)
+<img src="./img/connector_ip68.png" width="100" align="right" />
+
 ## Montaje
 La idea es cocolar y conectar todos los componentes dentro de la caja de 125x125mm de tapa transparente. Aunque el tubo Geiger irá fuera a efectos de que la caja no haga de aislamiento de la radiación alfa (α).
 
 La conectividad es bastante sencilla aunque hay que asegurarse de una buena conexión y aislamiento ya que el dispositivo trabaja a 380V.
 ![Breadboard](./img/IoT_nuclear_radiation_sensor_bb.png)
+
+- Lo primero será activar la salida de antena WiFi del **microcontrolador Wemos D1 mini**. Para ello hay que recolocar una resistencia de 0 ohm. Es un componente SMD por lo tanto pequeño y dificil de manejar. Hay que desoldarlo y vlverlo a soldar con un giro de 90º
+<img src="./img/IMG_4454.jpg" align="center" />
+
+- La placa del circuito principal del sensor se fijará al fondo de la caja con dos tornillos centrales. Tras lo que tendremos a la vista el espacio para colocar el **conector de alimentación** en la parte superior derecha. Si vamos alimentar el circuito con 12V dendremos que soldar la entrada del adaptador a la parte interna de este conector.
+<img src="./img/IMG_4451.jpg" width="300" align="center" />
+
+- Por otra parte vamos a preparar el **tubo Geiger** para que quede en el exterior de manera que sea más sensible a la radiación Alfa. Para ello utilizaremos dos cables gruesos, de diferentes colores para mantener la referencia de la polaridad. Estos cables van soldados directamente al tubo y a un casquillo de fusible en el otro extremo.
+<br>
+Nos aseguraremos de aislar bien todas las partes donde el conector del tubo haya quedado expuesto al aire. El tubo se alimenta de 380V que es una tensión peligrosa.
+<img src="./img/geiger_tube.jpg" width="600" align="center" />
+
+- La **antena Wifi** se podrá situar fácilmente en la esquina superior derecha de la caja:
+<img src="./img/IMG_4450.jpg" width="300" align="center" />
+
+- Antes de fijar la placa transpatente que soporta la PCB, conectaremos el cable de tres hilos.
+<img src="./img/IMG_4449.jpg" width="300" align="center" />
+
+
 
 
 ## Software
