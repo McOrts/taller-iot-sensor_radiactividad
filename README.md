@@ -6,11 +6,11 @@ Taller IoT para construir un medidor Geiger conectado. Basado en el ESP8266, MQT
 - [ ] 1 x [WEMOS D1 Mini Pro 16 MBytes con antena externa](https://www.aliexpress.com/item/32801063577.html)
 <img src="./img/WemosD1MiniPro.png" width="250" align="right" />
 
-La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamaño reducido.
+La placa de prototipo Wemos D1 Mini es microcontrolador muy versátil y de tamaño reducido.
   - Permite ser programado directamente desde el IDE de Arduino.
   - Ofrece pines de voltajes de salida de 3,2V y 5V.
 <br>
-  - Tiene conectividad Wi-Fi con todo el estak de TCP/IP.
+  - Tiene conectividad Wi-Fi con todo el _stack_ de TCP/IP.
 <br>
   - Incluye el chip CP2104 USB-TO-UART IC
 <br>
@@ -50,7 +50,7 @@ La placa de prototipo Wemos D1 Mini es microcontrolador muy versatil y de tamañ
 <img src="./img/connector_ip68.png" width="100" align="right" />
 
 ## Montaje
-La idea es cocolar y conectar todos los componentes dentro de la caja de 125x125mm de tapa transparente. Aunque el tubo Geiger irá fuera a efectos de que la caja no haga de aislamiento de la radiación alfa (α).
+La idea es colocar y conectar todos los componentes dentro de la caja de 125x125mm de tapa transparente. Aunque el tubo Geiger irá fuera a efectos de que la caja no haga de aislamiento de la radiación alfa (α).
 
 La conectividad es bastante sencilla aunque hay que asegurarse de una buena conexión y aislamiento ya que el dispositivo trabaja a 380V.
 ![Breadboard](./img/IoT_nuclear_radiation_sensor_bb.png)
@@ -58,10 +58,10 @@ La conectividad es bastante sencilla aunque hay que asegurarse de una buena cone
 - Lo primero será cablear la PCB según el esquema anterior.
 <img src="./img/breadboard.jpg" width="300" align="center" />
 
-- Si queremos que el sensor tenga un largo alcance de conexión. Es necesario activar la salida de antena WiFi del **microcontrolador Wemos D1 mini**. Para ello hay que recolocar una resistencia de 0 ohm. Es un componente SMD por lo tanto pequeño y dificil de manejar. Hay que desoldarlo y vlverlo a soldar con un giro de 90º
+- Si queremos que el sensor tenga un largo alcance de conexión. Es necesario activar la salida de antena WiFi del **microcontrolador Wemos D1 mini**. Para ello hay que recolocar una resistencia de 0 ohm. Es un componente SMD por lo tanto pequeño y dificil de manejar. Hay que des-soldarlo y volver a soldar con un giro de 90º
 <img src="./img/IMG_4454.jpg" align="center" />
 
-- La placa del circuito principal del sensor se fijará al fondo de la caja con dos tornillos centrales. Tras lo que tendremos a la vista el espacio para colocar el **conector de alimentación** en la parte superior derecha. Si vamos alimentar el circuito con 12V dendremos que soldar la entrada del adaptador a la parte interna de este conector.
+- La placa del circuito principal del sensor se fijará al fondo de la caja con dos tornillos centrales. Tras lo que tendremos a la vista el espacio para colocar el **conector de alimentación** en la parte superior derecha. Si vamos alimentar el circuito con 12V tendremos que soldar la entrada del adaptador a la parte interna de este conector.
 <img src="./img/IMG_4451.jpg" width="300" align="center" />
 
 - Por otra parte vamos a preparar el **tubo Geiger** para que quede en el exterior de manera que sea más sensible a la radiación Alfa. Para ello utilizaremos dos cables gruesos, de diferentes colores para mantener la referencia de la polaridad. Estos cables van soldados directamente al tubo y a un casquillo de fusible en el otro extremo.
@@ -74,7 +74,7 @@ Nos aseguraremos de aislar bien todas las partes donde el conector del tubo haya
 
 <img src="./img/cover+pcb.png" width="300" align="right" />
 
-- Antes de fijar la placa transpatente que soporta la PCB, conectaremos el cable de tres hilos.
+- Antes de fijar la placa transparente que soporta la PCB, conectaremos el cable de tres hilos.
 <img src="./img/IMG_4449.jpg" width="300" align="center" />
 
 ## Software
@@ -103,7 +103,7 @@ Busca el paquete ESP8266 e instálalo. Una vez que se haya instalado, puedes cer
 A continuación, debemos seleccionar la placa Wemos D1 Mini PRO del menú de herramientas. Tendremos que seleccionar **LOLIN (WEMOS) D1 mini PRO** de los dispositivos ESP recién agregados.
 <img src="./img/WEMOSD1PROSettingIDE.png" width="700"/> 
 
-Puede suceder que la aplicación encuentre dependencias u otras librerias desactializadas. Aparecería un mensaje como este que deberás aceptar.
+Puede suceder que la aplicación encuentre dependencias u otras librerías des-actializadas. Aparecería un mensaje como este que deberás aceptar.
 <img src="./img/ESPWemosIDE.png" width="500"/> 
 
 Finalmente, debemos elegir el puerto correcto en el menú de herramientas . En Mac/Linux esto aparecerá como algo así como **dev/cu.usbserial-xxxx** y en Windows será **COMX\**.
@@ -142,36 +142,50 @@ const char* mqtt_pub_topic_radiation = "/home/meteo/radiation_sensor/cpm";
 const int pin_detector = 14; //D5
 ```
 
-Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./src/IoT_nuclear_radiation_sensor/IoT_nuclear_radiation_sensor.ino) y dar al botón de cargar (_upload_) y al cabo de un rato, el firmaware nuevo se cargará en la placa empezando a parpadear el LED y con estos mensajes de salida en la aplicación:
+Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./src/IoT_nuclear_radiation_sensor/IoT_nuclear_radiation_sensor.ino) y dar al botón de cargar (_upload_) y al cabo de un rato, el _firmaware_ nuevo se cargará en la placa empezando a parpadear el LED y con estos mensajes de salida en la aplicación:
 <img src="./img/IDE_WEMOS_test_blink_output.png" width="700"/> 
 
 ## Registrar el dispositivo
-Vamos a utilizar la plataforma de GMC.MAP que está desarrollada por un fabricante GQ Electronics LLC y que amablemente ha abierto a la comunidad para que podamos integrar nuestros sensores en su GIS.
+Vamos a utilizar la plataforma de GMC.MAP que está desarrollada por el fabricante GQ Electronics LLC y que amablemente ha abierto a la comunidad para que podamos integrar nuestros sensores en su GIS.
 
 ### Crea una cuenta
 <img src="./img/gmc_register2.jpg" align="left" />
 
-El registro del dispositivo se hace desde la web https://www.gmcmap.com/userAccountLogin-x.asp
+El registro del dispositivo se hace desde la web https://www.gmcmap.com/userAccountLogin-x.asp donde tendremos que darnos de alta con una dirección de correo. 
 
 ### Añade el dispositivo
+
+Desde _My account_ entramos en la opción de _Manage my Geiger Counters_ y pulsamos _Add a device_. Lo primero que nos pedirán será la ubicación geográfica del sensor que se determina buscando en el mapa el punto de instalación y marcando con el ratón el lugar.
+
+Hecho esto, tendremos que editar de nuevo la ficha del dispositivo para completar algunos datos más. Pulsando _Update My Geiger Counter_ habremos acabado el proceso quedándonos con el _Geiger Counter ID_ que utilizaremos para la API.
 
 <img src="./img/gmc_register0.jpg" align="center" />
 <img src="./img/gmc_register1.jpg" align="center" />
 
-
-Una vez creas una cuenta e inicias sesión, podrás registrar tu dispositivo. Completa el formulario para registrar tu dispositivo. Ve a Inicio -> (Iniciar sesión) - Sensores -> Registrar nuevo sensor
-
--   El ID del sensor es el ChipID del ESP8266 (NodeMCU) que anotaste antes
--   Tu dirección de correo electrónico no será publicada
--   Tu dirección: Calle con número de casa, código postal y ciudad. Haga clic en "Buscar dirección ingresada" para obtener las coordenadas de la ubicación. Compruebe la posición, cámbielo si es necesario
--   Establece un nombre de sensor personal para que sea más fácil separarlos si tienes varios sensores (como jardín, etc.)
--   Los alrededores de la estación (Ejemplo: altura sobre el suelo, lado de la carretera, alto volumen de tráfico, campo libre o similar)
-
 ## Integración con Node-RED
-<img src="img/node-red.png" width="700" align="center" />
-
 <img src="img/mqtt_topic.png" width="50" align="right" />
 
-Como hemos visto en la configuración del firmware del microcontrolador tenemos un servidor MQTT al que se enviará la información. Si visualizamos directamente el topic donde llevan los valores, veremos esto:
+Como hemos visto en la configuración del firmware del microcontrolador tenemos un servidor MQTT al que el dispositivo enviará una trama de datos cada minuto. Si visualizamos directamente el topic donde llegan estos valores, veremos esto:
+- El valor de **cpm** que es el total de pulsos por minuto. 
+- Los micro-Sievert/hora **uSv/hr** que son
+
+Vamos a utilizar la aplicación Nore-RED de control de flujos. Configuraremos un flujo para procesar y encaminar los datos recibidos por subscripción al topic de MQTT hacia la API del servidor web de GMC.MAP. 
+Esta es el esquema básico del flujo cuyo código fuente lo puedes obtener en:
+
+<img src="img/IoT_nuclear_radiation_sensor_NoderedBasicFlow.png"  align="center" />
+
+
+De esta manera nuestras lecturas serán incorporadas a esta plataforma donde nuestros datos se guardarán y el último valor será mostrado en el mapa.
+
+
+At lease one reading data has to be submitted.
+UserAccountID: user account ID. This ID is assigned once a user registration is completed.
+GeigerCounterID: a global unique ID for each registered Geiger Counter.
+nCPM: Count Per Minute reading from this Geiger Counter.
+nACPM: Average Count Per Minute reading from this Geiger Counter(optional).
+nuSv: uSv/h reading from this Geiger Counter(optional).
+
+
+<img src="img/node-red.png" width="700" align="center" />
 
 
