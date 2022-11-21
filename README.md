@@ -149,14 +149,14 @@ Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./s
 Vamos a utilizar la plataforma de GMC.MAP que está desarrollada por un fabricante GQ Electronics LLC y que amablemente ha abierto a la comunidad para que podamos integrar nuestros sensores en su GIS.
 
 ### Crea una cuenta
-<img src="./img/gmc_register2.jpg" align="left" />
+<img src="./img/gmc_register2.png" width="300" align="left" />
 
 El registro del dispositivo se hace desde la web https://www.gmcmap.com/userAccountLogin-x.asp
 
 ### Añade el dispositivo
 
-<img src="./img/gmc_register0.jpg" align="center" />
-<img src="./img/gmc_register1.jpg" align="center" />
+<img src="./img/gmc_register0.png" width="300" align="center" />
+<img src="./img/gmc_register1.png" width="300" align="center" />
 
 
 Una vez creas una cuenta e inicias sesión, podrás registrar tu dispositivo. Completa el formulario para registrar tu dispositivo. Ve a Inicio -> (Iniciar sesión) - Sensores -> Registrar nuevo sensor
@@ -168,7 +168,7 @@ Una vez creas una cuenta e inicias sesión, podrás registrar tu dispositivo. Co
 -   Los alrededores de la estación (Ejemplo: altura sobre el suelo, lado de la carretera, alto volumen de tráfico, campo libre o similar)
 
 ## Integración con Node-RED
-<img src="img/node-red.png" width="700" align="center" />
+<img src="img/node-red_flow.png" width="800" align="center" />
 
 <img src="img/mqtt_topic.png" width="50" align="right" />
 
