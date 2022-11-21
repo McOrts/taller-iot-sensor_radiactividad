@@ -149,43 +149,52 @@ Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./s
 Vamos a utilizar la plataforma de GMC.MAP que está desarrollada por el fabricante GQ Electronics LLC y que amablemente ha abierto a la comunidad para que podamos integrar nuestros sensores en su GIS.
 
 ### Crea una cuenta
-<img src="./img/gmc_register2.jpg" align="left" />
+<img src="./img/gmc_register2.png" align="left" />
 
 El registro del dispositivo se hace desde la web https://www.gmcmap.com/userAccountLogin-x.asp donde tendremos que darnos de alta con una dirección de correo. 
 
 ### Añade el dispositivo
 
-Desde _My account_ entramos en la opción de _Manage my Geiger Counters_ y pulsamos _Add a device_. Lo primero que nos pedirán será la ubicación geográfica del sensor que se determina buscando en el mapa el punto de instalación y marcando con el ratón el lugar.
+Desde _My account_ entramos en la opción de: _Manage my Geiger Counters_ y pulsamos: _Add a device_. Lo primero que nos pedirán será la ubicación geográfica del sensor que se determina buscando en el mapa el punto de instalación y marcando con el ratón el lugar.
 
 Hecho esto, tendremos que editar de nuevo la ficha del dispositivo para completar algunos datos más. Pulsando _Update My Geiger Counter_ habremos acabado el proceso quedándonos con el _Geiger Counter ID_ que utilizaremos para la API.
 
-<img src="./img/gmc_register0.jpg" align="center" />
-<img src="./img/gmc_register1.jpg" align="center" />
+<img src="./img/gmc_register0.png" align="center" />
+<img src="./img/gmc_register1.png" align="center" />
 
 ## Integración con Node-RED
 <img src="img/mqtt_topic.png" width="50" align="right" />
 
 Como hemos visto en la configuración del firmware del microcontrolador tenemos un servidor MQTT al que el dispositivo enviará una trama de datos cada minuto. Si visualizamos directamente el topic donde llegan estos valores, veremos esto:
 - El valor de **cpm** que es el total de pulsos por minuto. 
-- Los micro-Sievert/hora **uSv/hr** que son
+- Los micro-Sievert/hora de los últimos 5 minutos **uSv/hr** que es la medida de la dosis de contaminación radiactiva más común.
 
-Vamos a utilizar la aplicación Nore-RED de control de flujos. Configuraremos un flujo para procesar y encaminar los datos recibidos por subscripción al topic de MQTT hacia la API del servidor web de GMC.MAP. 
-Esta es el esquema básico del flujo cuyo código fuente lo puedes obtener en:
+## Integración con GMC.MAP
+Vamos a utilizar la aplicación Nore-RED de control de flujos para procesar y encaminar los datos recibidos por subscripción al topic de MQTT hacia la API del servidor web de GMC.MAP. 
+Este es el esquema básico del flujo cuyo código fuente lo puedes obtener en: [IoT_nuclear_radiation_sensor_NoderedBasicFlow.json](./src/IoT_nuclear_radiation_sensor_NoderedBasicFlow.json
 
 <img src="img/IoT_nuclear_radiation_sensor_NoderedBasicFlow.png"  align="center" />
 
+El primer nodo es el que lee el topic de MQTT obteniendo el mensaje JSON descrito anteriormente. El segundo, ¨Compose URL¨ crea una cadena con los parámetros y los valores para la llamada a la API. El siguiente nodo sencillamente cambia el atributo del mensaje, tiene que ser URL. Para que luego sea lanzada la petición con el método POST. El último nodo nos mostrará en la ventana de mensajes de debug la respuesta de la API. Si todo ha ido bien será: <!--sendmail.asp-->OK.ERR0 
 
-De esta manera nuestras lecturas serán incorporadas a esta plataforma donde nuestros datos se guardarán y el último valor será mostrado en el mapa.
+La aplicación realmente es mas compleja porque tiene que calcular valores de media horaria y minutal. Ya que la petición API requiere de estos valores. Los campos necesarios para la petición son:
+- **UserAccountID**: el identificador de usuario. Se obtiene tras el registro en la web.
+- **GeigerCounterID**: el identificador único del dispositivo registrado en la web según los pasos descritos anteriormente.
+- **nCPM**: número de cuentas por minuto. Es el número de partículas detectadas.
+- **ACPM**: media de CPM en una hora.
+- ** nuSv**: micro-Sievert/hora calculados según la fórmula: ¨CMP * 0,0065¨
 
+De esta manera nuestras lecturas serán incorporadas a esta plataforma donde nuestros datos se guardarán y el último valor será mostrado en un punto el mapa con el color en función al valor de CPM.
 
-At lease one reading data has to be submitted.
-UserAccountID: user account ID. This ID is assigned once a user registration is completed.
-GeigerCounterID: a global unique ID for each registered Geiger Counter.
-nCPM: Count Per Minute reading from this Geiger Counter.
-nACPM: Average Count Per Minute reading from this Geiger Counter(optional).
-nuSv: uSv/h reading from this Geiger Counter(optional).
+<img src="img/gmcmap.png" width="700" align="center" />
 
+Para este proyecto se ha ampliado la aplicación Node-RED con el fin de ofrecer una web donde observar en tiempo real las lecturas y su evolución: http://radiacion.mooo.com:48059/ui
+<img src="img/IoT_nuclear_radiation_sensor_dashboard.png" width="700" align="center" />
 
-<img src="img/node-red.png" width="700" align="center" />
+El flujo necesario para esto es más complejo y su código también está repositado aquí. 
+<img src="img/IoT_nuclear_radiation_sensor_NoderedBasicFlow.png" width="700" align="center" />
 
+## Agradecimientos 
+- Adrian Brancolino por sus buenos consejos para resolver los problemas de electrónica a los que me he enfrentado.
+- [GQ Electronics LLC](https://www.gqelectronicsllc.com/) por la iniciativa de GMC.map.
 
