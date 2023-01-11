@@ -1,6 +1,10 @@
 # <img src="./img/LogoTelegramGroup.png" width="50"/> Taller sensor IoT de radiactividad
 Taller IoT para construir un medidor Geiger conectado. Basado en el ESP8266, MQTT, Node-RED e integrado en la red GMC
 
+La solución tecnológica utilizada para la plataforma de despliegue de servicios y datos. Está basada en hardware y software libre. 
+
+<img src="./img/IoT_nuclear_radiation_sensor_architecture.png" align="center" />
+
 ## Componentes que vamos a utilizar
 **Hardware**
 - [ ] 1 x [WEMOS D1 Mini Pro 16 MBytes con antena externa](https://www.aliexpress.com/item/32801063577.html)
