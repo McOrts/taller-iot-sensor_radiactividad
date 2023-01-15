@@ -1,9 +1,9 @@
 // WiFi Configuration
-const char* ssid = "??";
-const char* password = "??";
+const char* ssid = ¿?";
+const char* password = "¿?";
 
 // MQTT Configuration
-const char* mqtt_server = "192.168.1.114";
+const char* mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
 const char* mqtt_id = "radiation_sensor";
 const char* mqtt_sub_topic_healthcheck = "/home/meteo/radiation_sensor";
