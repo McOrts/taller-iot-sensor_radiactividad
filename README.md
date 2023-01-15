@@ -116,7 +116,10 @@ Finalmente, debemos elegir el puerto correcto en el menú de herramientas . En M
 ### 5. _Testing Point_
 En este punto vamos a chequear todo cargando un _sketch_ que hará que la luz azul de la placa parpadee.
 Este programa lo podrás encontrar en la ruta de ejemplos:
+
 <img src="./img/IDE_WEMOS_test_blink.png" width="700"/> 
+
+Estos serían los mensajes de salida cuando se carge el ejemplo en el microcontrolador:
 
 <img src="./img/IDE_WEMOS_test_blink_output.png" width="700"/> 
 
@@ -128,7 +131,10 @@ Por lo tanto hay se buscarla e instalarla con todas sus dependencias:
 <img src="./img/ArduinoLibMQTT.png" width="700"/> 
 
 ### 7. Configuración y carga del firmware 
-El programa incluye un archivo de configuración _settings.h_ que contiene las credenciales para la conexión WiFi que hay que poner, y la configuración MQTT de nuestro servidor o de uno externo.
+
+Con todo lo anterior configurado ahora solo tendrás que bajarte el programa de la carpeta [IoT_nuclear_radiation_sensor](./src/IoT_nuclear_radiation_sensor) que contiene el sketch de Arduino formado por dos archivos.
+
+Uno de los archivos es el de configuración _settings.h_ que contiene las credenciales para la conexión WiFi que hay que poner, y la configuración MQTT de nuestro servidor o de uno externo.
 Para hacer las pruebas iniciales hemos utilizado un servidor MQTT (Broker) público. El [HiveMQ](https://www.hivemq.com/public-mqtt-broker/) nos permite usar de una forma simple, sin usuario, este servicio.
 
 ```cpp
@@ -149,8 +155,20 @@ const char* mqtt_pub_topic_radiation = "/home/meteo/radiation_sensor/cpm";
 const int pin_detector = 14; //D5
 ```
 
-Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./src/IoT_nuclear_radiation_sensor/IoT_nuclear_radiation_sensor.ino) y dar al botón de cargar (_upload_) y al cabo de un rato, el _firmaware_ nuevo se cargará en la placa empezando a parpadear el LED y con estos mensajes de salida en la aplicación:
+Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./src/IoT_nuclear_radiation_sensor/IoT_nuclear_radiation_sensor.ino) y 
+Tras pulsar al botón de cargar (_upload_) y al cabo de un rato, el _firmaware_ nuevo se cargará en la placa empezando a parpadear el LED y con estos mensajes de salida en la aplicación:
 <img src="./img/IDE_WEMOS_MQTT_output.png" width="800"/> 
+
+### Ajuste de la lectura
+Puede pasar que no se estén recibiendo los datos del circuito del contador Geiger. Segurante se deba a que la resistencia variable está en un valor muy alto.
+
+Toca ahora hacer su ajuste. Giraremos a la posición de 0 ohm hasta ver como empiezan a mostrarse las lecturas en la consola del IDE de Arduino:
+```
+****************    17 CPM
+**************    14 CPM
+*****************    17 CPM
+```
+Seguidamente iremos girando el ajuste hasta que dejemos de recibir la lecturas. En ese punto sólo habrá que retroceder un poco hasta que de nuevo tengamos lecturas. De esta manera ajustaremos la tensión de entrada del puerto a un valor seguro.
 
 ## Registrar el dispositivo
 Vamos a utilizar la plataforma de GMC.MAP que está desarrollada por el fabricante GQ Electronics LLC y que amablemente ha abierto a la comunidad para que podamos integrar nuestros sensores en su GIS.
@@ -166,6 +184,12 @@ Desde _My account_ entramos en la opción de: _Manage my Geiger Counters_ y puls
 <img src="./img/gmc_register0.png" width="350" align="left" />
 
 Hecho esto, tendremos que editar de nuevo la ficha del dispositivo para completar algunos datos más. Pulsando _Update My Geiger Counter_ habremos acabado el proceso quedándonos con el _Geiger Counter ID_ que utilizaremos para la API.
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
 ## Integración con Node-RED
 <img src="img/mqtt_topic.png" width="50" align="right" />
@@ -180,7 +204,7 @@ Para una primera prueba de recepción de datos. Tenemos este sencillo flujo cuyo
 
 Este programa va a subscribirse a los dos topic de MQTT para recuperar los valores de cpm e IP transmitidos por el sensor y representará sus valores en unos sencillos gráficos del dashboard de NodeRED:
 
-<img src="img/IoT_nuclear_radiation_sensor_Nodered_BASIC_UI.png"  align="center" />
+<img src="img/IoT_nuclear_radiation_sensor_Nodered_BASIC_UI.png" width="350" align="center" />
 
 ## Integración con GMC.MAP
 Vamos a utilizar la aplicación Nore-RED de control de flujos para procesar y encaminar los datos recibidos por subscripción al topic de MQTT hacia la API del servidor web de GMC.MAP. 
