@@ -118,6 +118,8 @@ En este punto vamos a chequear todo cargando un _sketch_ que hará que la luz az
 Este programa lo podrás encontrar en la ruta de ejemplos:
 <img src="./img/IDE_WEMOS_test_blink.png" width="700"/> 
 
+<img src="./img/IDE_WEMOS_test_blink_output.png" width="700"/> 
+
 ### 6. Añadir la librería de MQTT
 Nuestro sensor va a utilizar colas MQTT para publicar sus lecturas y recbir comandos. Esta es la razón por la que hay la llamada a esta librería: 
 #include <PubSubClient.h>
@@ -127,6 +129,7 @@ Por lo tanto hay se buscarla e instalarla con todas sus dependencias:
 
 ### 7. Configuración y carga del firmware 
 El programa incluye un archivo de configuración _settings.h_ que contiene las credenciales para la conexión WiFi que hay que poner, y la configuración MQTT de nuestro servidor o de uno externo.
+Para hacer las pruebas iniciales hemos utilizado un servidor MQTT (Broker) público. El [HiveMQ](https://www.hivemq.com/public-mqtt-broker/) nos permite usar de una forma simple, sin usuario, este servicio.
 
 ```cpp
 // WiFi Configuration
@@ -134,7 +137,7 @@ const char* ssid = "??";
 const char* password = "??";
 
 // MQTT Configuration
-const char* mqtt_server = "192.168.1.114";
+const char* mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
 const char* mqtt_id = "radiation_sensor";
 const char* mqtt_sub_topic_healthcheck = "/home/meteo/radiation_sensor";
@@ -147,7 +150,7 @@ const int pin_detector = 14; //D5
 ```
 
 Con todo lo anterior configurado ahora solo tendrás que abrir [el programa](./src/IoT_nuclear_radiation_sensor/IoT_nuclear_radiation_sensor.ino) y dar al botón de cargar (_upload_) y al cabo de un rato, el _firmaware_ nuevo se cargará en la placa empezando a parpadear el LED y con estos mensajes de salida en la aplicación:
-<img src="./img/IDE_WEMOS_test_blink_output.png" width="700"/> 
+<img src="./img/IDE_WEMOS_MQTT_output.png" width="800"/> 
 
 ## Registrar el dispositivo
 Vamos a utilizar la plataforma de GMC.MAP que está desarrollada por el fabricante GQ Electronics LLC y que amablemente ha abierto a la comunidad para que podamos integrar nuestros sensores en su GIS.
@@ -168,14 +171,22 @@ Hecho esto, tendremos que editar de nuevo la ficha del dispositivo para completa
 <img src="img/mqtt_topic.png" width="50" align="right" />
 
 Como hemos visto en la configuración del firmware del microcontrolador tenemos un servidor MQTT al que el dispositivo enviará una trama de datos cada minuto. Si visualizamos directamente el topic donde llegan estos valores, veremos esto:
+- Dirección IP de red del dispositivo 
 - El valor de **cpm** que es el total de pulsos por minuto. 
-- Los micro-Sievert/hora de los últimos 5 minutos **uSv/hr** que es la medida de la dosis de contaminación radiactiva más común.
+
+Para una primera prueba de recepción de datos. Tenemos este sencillo flujo cuyo código fuente lo puedes obtener en: [IoT_nuclear_radiation_sensor_Nodered_BASIC.json](./src/IoT_nuclear_radiation_sensor_Nodered_BASIC.json)
+
+<img src="img/IoT_nuclear_radiation_sensor_Nodered_BASIC_flow.png"  align="center" />
+
+Este programa va a subscribirse a los dos topic de MQTT para recuperar los valores de cpm e IP transmitidos por el sensor y representará sus valores en unos sencillos gráficos del dashboard de NodeRED:
+
+<img src="img/IoT_nuclear_radiation_sensor_Nodered_BASIC_UI.png"  align="center" />
 
 ## Integración con GMC.MAP
 Vamos a utilizar la aplicación Nore-RED de control de flujos para procesar y encaminar los datos recibidos por subscripción al topic de MQTT hacia la API del servidor web de GMC.MAP. 
-Este es el esquema básico del flujo cuyo código fuente lo puedes obtener en: [IoT_nuclear_radiation_sensor_NoderedBasicFlow.json](./src/IoT_nuclear_radiation_sensor_NoderedBasicFlow.json
+Este es el esquema básico del flujo cuyo código fuente lo puedes obtener en: [IoT_nuclear_radiation_sensor_Nodered_GMC.json](./src/IoT_nuclear_radiation_sensor_Nodered_GMC.json)
 
-<img src="img/IoT_nuclear_radiation_sensor_NoderedBasicFlow.png"  align="center" />
+<img src="img/IoT_nuclear_radiation_sensor_Nodered_GMC.png"  align="center" />
 
 El primer nodo es el que lee el topic de MQTT obteniendo el mensaje JSON descrito anteriormente. El segundo, ¨Compose URL¨ crea una cadena con los parámetros y los valores para la llamada a la API. El siguiente nodo sencillamente cambia el atributo del mensaje, tiene que ser URL. Para que luego sea lanzada la petición con el método POST. El último nodo nos mostrará en la ventana de mensajes de debug la respuesta de la API. Si todo ha ido bien será: <!--sendmail.asp-->OK.ERR0 
 
