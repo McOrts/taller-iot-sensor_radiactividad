@@ -85,7 +85,7 @@ Nos aseguraremos de aislar bien todas las partes donde el conector del tubo haya
 
 ## Demo
 Video de la prueba con la fuente de emisión de partículas alpha de isótopo 241 de americio.
-[![Prueba de un sensor de radiactividad conectado a internet](https://i9.ytimg.com/vi/a5gfNajmM6I/mqdefault.jpg?sqp=CMzQnZ8G-oaymwEoCMACELQB8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYQyBlKE0wDw==&rs=AOn4CLBPnDjH_kAXbjHBS7e4Lf4TjGF3Jw)](https://youtube.com/shorts/a5gfNajmM6I)
+[![Prueba de un sensor de radiactividad conectado a internet](./img/demo_video.png)](https://youtube.com/shorts/a5gfNajmM6I)
 
 ## Software
 ### 1. Instalación del IDE de Arduino (Ver 2.0.1)
