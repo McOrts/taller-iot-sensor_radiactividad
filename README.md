@@ -60,7 +60,9 @@ La conectividad es bastante sencilla aunque hay que asegurarse de una buena cone
 ![Breadboard](./img/IoT_nuclear_radiation_sensor_bb.png)
 
 - Lo primero será cablear la PCB según el esquema anterior.
-<img src="./img/breadboard.jpg" width="300" align="center" />
+<img src="./img/breadboard_back.png" width="300" align="center" />
+<img src="./img/breadboard_front_up.png" width="300" align="center" />
+<img src="./img/breadboard_front.png" width="300" align="center" />
 
 - Si queremos que el sensor tenga un largo alcance de conexión. Es necesario activar la salida de antena WiFi del **microcontrolador Wemos D1 mini**. Para ello hay que recolocar una resistencia de 0 ohm. Es un componente SMD por lo tanto pequeño y dificil de manejar. Hay que des-soldarlo y volver a soldar con un giro de 90º
 <img src="./img/IMG_4454.jpg" align="center" />
@@ -80,6 +82,10 @@ Nos aseguraremos de aislar bien todas las partes donde el conector del tubo haya
 
 - Antes de fijar la placa transparente que soporta la PCB, conectaremos el cable de tres hilos.
 <img src="./img/IMG_4449.jpg" width="300" align="center" />
+
+## Demo
+Video de la prueba con la fuente de emisión de partículas alpha de isótopo 241 de americio.
+[![Prueba de un sensor de radiactividad conectado a internet](https://i9.ytimg.com/vi/a5gfNajmM6I/mqdefault.jpg?sqp=CMzQnZ8G-oaymwEoCMACELQB8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYQyBlKE0wDw==&rs=AOn4CLBPnDjH_kAXbjHBS7e4Lf4TjGF3Jw)](https://youtube.com/shorts/a5gfNajmM6I)
 
 ## Software
 ### 1. Instalación del IDE de Arduino (Ver 2.0.1)
