@@ -124,6 +124,7 @@ void reconnect() {
     Serial.print(".");
     // Intento de conexión
     if (clientMqtt.connect(mqtt_id)) { // Ojo, para más de un dispositivo cambiar el nombre para evitar conflicto
+    // if (clientMqtt.connect(mqtt_id, mqttUser, mqttPassword )) { // Ojo, para más de un dispositivo cambiar el nombre para evitar conflicto
       Serial.println("");
       Serial.println("[MQTT]Conectado al servidor MQTT");
       // Once connected, publish an announcement...
